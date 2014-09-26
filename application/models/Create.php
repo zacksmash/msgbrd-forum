@@ -665,7 +665,7 @@ class Create
         $mail->AddAddress($op_email);
         $mail->Subject = EMAIL_POST_REPLY_SUBJECT;
 
-        $link = EMAIL_POST_REPLY_URL.'?id=' . $post_id;
+        $link = EMAIL_POST_REPLY_URL.'view/' . $post_id . '/';
 
         $mail->Body = EMAIL_POST_REPLY_CONTENT_ONE . $reply_author . ' said: ' . '"' . $reply_message . '"' . EMAIL_POST_REPLY_CONTENT_TWO . $link;
 
