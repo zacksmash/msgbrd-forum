@@ -30,7 +30,7 @@
 <div class="large-8 small-12 columns">
 <a href="/discussion/view/<?= $post['id']; ?>/"><?= $post['post_title']; ?> <? if ($post['edited'] == 1) : ?><b><small>(Edited)</small></b><? endif; ?></a><br>
 <small>Posted by <b><?= $post['post_author'] ?></b> <?= $timeago = $create->timeAgo(strtotime($post['date'])); ?> in</small>
-<span class="<? if ($post['post_category'] == "Bugs") : ?>alert<? elseif ($post['post_category'] == "Features") : ?>success<? elseif ($post['post_category'] == "Questions") : ?>secondary<? elseif ($post['post_category'] == "Announcements") : ?>announcements<? endif; ?>radius label"><?= $post['post_category'] ?></span>
+<span class="<? if ($post['post_category'] == "Bugs") : ?>alert<? elseif ($post['post_category'] == "Features") : ?>success<? elseif ($post['post_category'] == "Questions") : ?>secondary<? elseif ($post['post_category'] == "Announcements") : ?>announcements<? endif; ?> radius label"><?= $post['post_category'] ?></span>
 <? if ($post['post_solved'] == 1 ) : ?><span class="radius label">Solved</span><? elseif ($post['post_solved'] == 2 ) : ?><span class="warning radius label">Reopened</span><? endif; ?>
 </div>
 
