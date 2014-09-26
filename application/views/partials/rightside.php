@@ -12,7 +12,7 @@
 			    <div class="row">
 				    <div class="large-6 small-6 columns" style="border-right: 1px solid #dddddd;">
 				    	<span><?= $post_total = $create->getUserPostTotal($_SESSION['user_id']); ?></span><br>
-				    	<small><? if ($post_total = $create->getUserPostTotal($_SESSION['user_id']) == 1) : ?>Discussion<? else : ?>Open Discussions<? endif; ?></small>
+				    	<small>Open <? if ($post_total = $create->getUserPostTotal($_SESSION['user_id']) == 1) : ?>Discussion<? else : ?>Discussions<? endif; ?></small>
 				    </div>
 				    <div class="large-6 small-6 columns">
 				    	<span><?= $reply_total = $create->getUserReplyTotal($_SESSION['user_id']); ?></span><br>
