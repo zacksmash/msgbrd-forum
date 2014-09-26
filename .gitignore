@@ -2,3 +2,5 @@
 *config.codekit
 public/scss/
 bower_components
+public/avatars/
+!public/avatars/default-avatar.png
