@@ -238,7 +238,7 @@ class Create
         }
     }
     
-    public function getUserPosts($user_id)
+    private function getUserPosts($user_id)
     {
         // if database connection opened
         if ($this->databaseConnection()) {
@@ -288,7 +288,7 @@ class Create
         }
     }
     
-    public function getPostByType($category)
+    private function getPostByType($category)
     {
         // if database connection opened
         if ($this->databaseConnection()) {
@@ -478,7 +478,7 @@ class Create
 	    }
     }
     
-    public function getUserPostTotal($user_id) 
+    private function getUserPostTotal($user_id) 
     {
 	    // if database connection opened
 	    if ($this->databaseCOnnection()) {
@@ -497,7 +497,7 @@ class Create
 	    }
     }
     
-    public function getUserReplyTotal($user_id) 
+    private function getUserReplyTotal($user_id) 
     {
 	    // if database connection opened
 	    if ($this->databaseCOnnection()) {
@@ -656,7 +656,7 @@ class Create
 	    }
     }
     
-    public function sendNewReplyEmail($op_email, $post_id, $reply_author, $reply_message)
+    private function sendNewReplyEmail($op_email, $post_id, $reply_author, $reply_message)
     {
         $mail = new PHPMailer;
         

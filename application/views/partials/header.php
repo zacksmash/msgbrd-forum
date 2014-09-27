@@ -20,7 +20,7 @@
 				</ul>
 			
 				<section class="top-bar-section">
-					<!-- Right Nav Section -->
+					<!-- Left Nav Section -->
 					<ul class="left">
 						<? if ($login->isUserLoggedIn() == true) : ?>
 						<li><a href="<?= URL ?>">Home</a></li>
@@ -30,7 +30,12 @@
 						<li class="show-for-small-only"><a href="<?= URL ?>discussions/questions/">View Questions</a></li>
 						<li class="show-for-small-only"><a href="<?= URL ?>discussions/announcements/">View Announcements</a></li>
 						<li class="show-for-small-only"><a href="<?= URL ?>edit/">Edit Profile</a></li>
-						<li><a href="<?= URL ?>?logout">Log Out</a></li>
+						<li>
+							<a onclick="$('#user_logout').submit()">Logout</a>
+							<form action="/" method="post" id="user_logout">
+								<input type="hidden" name="logout">
+							</form>
+						</li>
 						<? else : ?>
 						<li><a href="<?= URL ?>password_reset/">Forgot Password</a></li>
 						<? endif; ?>

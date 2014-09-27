@@ -66,7 +66,7 @@ class Login
         //    logged-in-status is written into his session data on the server. this is the typical behaviour of common login scripts.
 
         // if user tried to log out
-        if (isset($_GET["logout"])) {
+        if (isset($_POST["logout"])) {
             $this->doLogout();
 
         // if user has an active session on the server
