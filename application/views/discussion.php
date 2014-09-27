@@ -43,7 +43,7 @@
 				</div>
 				<div class="large-10 small-10 columns">
 					<span><?= $reply['reply_message']; ?></span><br>
-					<small>Posted by <b><? if ($login->isUserLoggedIn() == true) : ?><a href="<? if ($reply['author_id'] == $_SESSION['user_id']) : ?>/<? else : ?>/users/?id=<?= $reply['author_id'] ?><? endif; ?>"><?= $reply['reply_author'] ?></a><? else : ?><?= $reply['reply_author'] ?><? endif ; ?></b> <?= $timeago = $create->timeAgo(strtotime($reply['date'])); ?> in</small>
+					<small>Posted by <b><? if ($login->isUserLoggedIn() == true && $reply['author_id'] != 0) : ?><a href="<? if ($reply['author_id'] == $_SESSION['user_id']) : ?>/<? else : ?>/users/view/<?= $reply['author_id'] ?>/<? endif; ?>"><?= $reply['reply_author'] ?></a><? else : ?><?= $reply['reply_author'] ?><? endif ; ?></b> <?= $timeago = $create->timeAgo(strtotime($reply['date'])); ?> in</small>
 			    </div>
 			    <? if ($_SESSION['user_is_admin'] == 1 && $reply['author_id'] != 0) : ?>
 			    <div class="large-12 small-12 columns">
