@@ -47,7 +47,7 @@
 			    </div>
 			    <? if ($_SESSION['user_is_admin'] == 1 && $reply['author_id'] != 0) : ?>
 			    <div class="large-12 small-12 columns">
-			    	<a><span class="alert radius label right delete-reply" data-reveal-id="delete_reply" data-reply-id="<?= $reply['id'] ?>" onclick="getReplyId(this)" style="margin-bottom: 15px;">Delete Reply</span></a>
+			    	<a><span class="alert radius label right delete-reply" data-reveal-id="delete_reply" data-reply-id="<?= $reply['id'] ?>" onclick="getReplyId(this)">Delete Reply</span></a>
 			    </div>
 			    <? endif; ?>
 			</div>

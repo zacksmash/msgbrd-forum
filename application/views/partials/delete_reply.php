@@ -4,7 +4,7 @@
 	</div>
 	
 	<div class="large-6 small-6 columns">
-		<form action="/discussion/?id=<?= $_GET['id'] ?>" method="post">
+		<form action="/discussion/view/<?= $post['id'] ?>/" method="post">
 			<input type="hidden" name="reply_id" id="reply_id" value="">
 			
 			<button type="submit" name="delete_reply" class="tiny radius alert expand button">Yes</button>
