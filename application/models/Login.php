@@ -608,30 +608,43 @@ class Login
     {
 	    // if database connection opened
 	    if ($this->databaseConnection()) {
-	    	// database query, update the social information for the selected user ($user_id)
-		    $sql = 'UPDATE users 
-		    		SET user_bio = :bio, user_twitter = :twitter, user_facebook = :facebook, user_linkedin = :linkedin 
-		    		WHERE user_id = :user_id';
-		    $query = $this->db_connection->prepare($sql);
-		    $query->bindValue(':bio', strip_tags($bio), PDO::PARAM_STR);
-		    $query->bindValue(':twitter', strip_tags($twitter), PDO::PARAM_STR);
-		    $query->bindValue(':facebook', strip_tags($facebook), PDO::PARAM_STR);
-		    $query->bindValue(':linkedin', strip_tags($linkedin), PDO::PARAM_STR);
-		    $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-		    $query->execute();
-		    
-		    if ($query->rowCount()) {
-                $this->messages[] = "Profile updated successfully";
-            } elseif ($query) {
-            	$this->messages[] = "Profile updated successfully";
-            } else {
-                $this->errors[] = "Profile could not be updated. Try again.";
+	    	
+	    	// validate twitter URL
+	    	if (!empty($twitter) && !filter_var($twitter, FILTER_VALIDATE_URL)) {
+	    		$this->errors[] = "The Twitter URL you entered was not in a valid format.";
+	    	// validate facebook URL
+	    	} elseif (!empty($facebook) && !filter_var($facebook, FILTER_VALIDATE_URL)) {
+	    		$this->errors[] = "The Facebook URL you entered was not in a valid format.";
+	    	// validate linked in URL
+	    	} elseif (!empty($linkedin) && !filter_var($linkedin, FILTER_VALIDATE_URL)) {
+	    		$this->errors[] = "The Linked In URL you entered was not in a valid format.";
+	    	// if all URLs pass, procede with db query
+	    	} else {
+		    	// database query, update the social information for the selected user ($user_id)
+			    $sql = 'UPDATE users 
+			    		SET user_bio = :bio, user_twitter = :twitter, user_facebook = :facebook, user_linkedin = :linkedin 
+			    		WHERE user_id = :user_id';
+			    $query = $this->db_connection->prepare($sql);
+			    $query->bindValue(':bio', strip_tags($bio), PDO::PARAM_STR);
+			    $query->bindValue(':twitter', strip_tags($twitter), PDO::PARAM_STR);
+			    $query->bindValue(':facebook', strip_tags($facebook), PDO::PARAM_STR);
+			    $query->bindValue(':linkedin', strip_tags($linkedin), PDO::PARAM_STR);
+			    $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+			    $query->execute();
+			    
+			    if ($query->rowCount()) {
+	                $this->messages[] = "Profile updated successfully";
+	            } elseif ($query) {
+	            	$this->messages[] = "Profile updated successfully";
+	            } else {
+	                $this->errors[] = "Profile could not be updated. Try again.";
+	            }
             }
 	    } else {
 		    return false;
 	    }
     }
-    
+ 
     public function setUserAvatar($user_id)
     {
 	    // if database connection opened
