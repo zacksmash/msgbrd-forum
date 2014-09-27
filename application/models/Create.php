@@ -238,7 +238,7 @@ class Create
         }
     }
     
-    private function getUserPosts($user_id)
+    public function getUserPosts($user_id)
     {
         // if database connection opened
         if ($this->databaseConnection()) {
@@ -288,7 +288,7 @@ class Create
         }
     }
     
-    private function getPostByType($category)
+    public function getPostByType($category)
     {
         // if database connection opened
         if ($this->databaseConnection()) {
@@ -478,7 +478,7 @@ class Create
 	    }
     }
     
-    private function getUserPostTotal($user_id) 
+    public function getUserPostTotal($user_id) 
     {
 	    // if database connection opened
 	    if ($this->databaseCOnnection()) {
@@ -497,7 +497,7 @@ class Create
 	    }
     }
     
-    private function getUserReplyTotal($user_id) 
+    public function getUserReplyTotal($user_id) 
     {
 	    // if database connection opened
 	    if ($this->databaseCOnnection()) {
@@ -543,7 +543,7 @@ class Create
 	   }
 	}
     
-    private function updatePost($post_id,
+    public function updatePost($post_id,
     							$post_category,  
     							$post_message)
     {
@@ -571,7 +571,7 @@ class Create
 	    }
     }
     
-    private function markPostSolved($post_id)
+    public function markPostSolved($post_id)
     {
 	    // if database connection opened
 	    if ($this->databaseConnection()) {
@@ -593,7 +593,7 @@ class Create
 	    }
     }
     
-    private function markPostReopened($post_id)
+    public function markPostReopened($post_id)
     {
 	    // if database connection opened
 	    if ($this->databaseConnection()) {
@@ -615,7 +615,7 @@ class Create
 	    }
     }
     
-    private function deletePost($post_id) {
+    public function deletePost($post_id) {
 	    // if database connection opened
 	    if ($this->databaseConnection()) {
 	    	// database, query delete the selected post
@@ -635,7 +635,7 @@ class Create
 	    }
     }
     
-    private function deleteReply($reply_id) {
+    public function deleteReply($reply_id) {
 	    // if database connection opened
 	    if ($this->databaseConnection()) {
 	    	// database, query delete the selected reply
@@ -656,7 +656,7 @@ class Create
 	    }
     }
     
-    private function sendNewReplyEmail($op_email, $post_id, $reply_author, $reply_message)
+    public function sendNewReplyEmail($op_email, $post_id, $reply_author, $reply_message)
     {
         $mail = new PHPMailer;
         
