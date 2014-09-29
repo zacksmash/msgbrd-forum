@@ -3348,7 +3348,7 @@ kbd {
   background: #FFFFFF;
   z-index: 50;
   min-width: 100%;
-  padding: 0 !important; }
+  padding: 10px; }
   [data-magellan-expedition] .sub-nav, [data-magellan-expedition-clone] .sub-nav {
     margin-bottom: 0; }
     [data-magellan-expedition] .sub-nav dd, [data-magellan-expedition-clone] .sub-nav dd {
@@ -4118,14 +4118,14 @@ dialog {
     .sub-nav li.active a {
       border-radius: 3px;
       font-weight: normal;
-      background: #008CBA;
+      background: #66CDAA;
       padding: 0.1875rem 1rem;
       cursor: default;
-      color: #fff; }
+      color: #FFFFFF; }
       .sub-nav dt.active a:hover,
       .sub-nav dd.active a:hover,
       .sub-nav li.active a:hover {
-        background: #0078a0; }
+        background: #46c298; }
 
 .switch {
   padding: 0;
