@@ -22,6 +22,7 @@
 		    </div>
 		    <div class="large-12 small-12 columns">
 				<div class="tiny radius expand button" data-reveal-id="new_discussion">New Discussion</div>
+				<? if (isset($post)) : ?>
 				<? if ($post['author_id'] === $_SESSION['user_id'] || $_SESSION['user_is_admin'] == 1 && $pagetitle == "View Discussion") : ?>
 				<ul class="button-group radius even-2" style="margin-left: 5px;">
 					<li>
@@ -42,6 +43,7 @@
 				<? endif; ?>
 				<? if ($_SESSION['user_is_admin'] == 1 && $pagetitle == "View Discussion") : ?>
 					<div class="tiny radius alert expand button" data-reveal-id="delete_discussion" style="margin-top: 20px;">Delete Discussion</div>
+				<? endif; ?>
 				<? endif; ?>
 				<hr>
 		    </div>
