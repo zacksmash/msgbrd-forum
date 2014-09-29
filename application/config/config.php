@@ -88,7 +88,7 @@ define("EMAIL_SMTP_ENCRYPTION", "ssl");
  */
 define("EMAIL_PASSWORDRESET_URL", "http://local.forum/password_reset/");
 define("EMAIL_PASSWORDRESET_FROM", "no-reply@example.com");
-define("EMAIL_PASSWORDRESET_FROM_NAME", "My Project");
+define("EMAIL_PASSWORDRESET_FROM_NAME", "MsgBrd Notification");
 define("EMAIL_PASSWORDRESET_SUBJECT", "Password reset for PROJECT XY");
 define("EMAIL_PASSWORDRESET_CONTENT", "Please click on this link to reset your password:");
 
@@ -98,7 +98,7 @@ define("EMAIL_PASSWORDRESET_CONTENT", "Please click on this link to reset your p
  */
 define("EMAIL_VERIFICATION_URL", "http://local.forum/");
 define("EMAIL_VERIFICATION_FROM", "no-reply@example.com");
-define("EMAIL_VERIFICATION_FROM_NAME", "My Project");
+define("EMAIL_VERIFICATION_FROM_NAME", "MsgBrd Notification");
 define("EMAIL_VERIFICATION_SUBJECT", "Account activation for PROJECT XY");
 define("EMAIL_VERIFICATION_CONTENT", "Please click on this link to activate your account:");
 

@@ -49,10 +49,4 @@ class Controller
         // return new model (and pass the database connection to the model)
         return new $model_name($this->db);
     }
-    
-    public function render($template)
-    {
-		require 'application/views/' . strtolower($template) . '.php';
-		return new $template($this->db);
-    }
 }
