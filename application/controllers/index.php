@@ -35,6 +35,8 @@ class home extends Controller
         } else {
         	$pagetitle = "Welcome - Log In";
         	
+        	$registration = $this->loadModel('Registration');
+        	
         	$posts = $create->getAllPosts();
         	
         	$pages = $create->pages;
