@@ -13,6 +13,8 @@ Version
 
 1.0
 
+[Here's a demo](https://forum.ennoapps.com)
+
 Installation
 -----------
 
