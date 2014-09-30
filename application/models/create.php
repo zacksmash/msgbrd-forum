@@ -77,7 +77,7 @@ class Create
         }
         
         if (isset($_POST['search_term'])) {
-			header("Location: /search_posts/?search=". $_POST['search_term']);
+			header("Location: /search_posts/?search=". strip_tags($_POST['search_term']));
 			exit();
 		}
     }
@@ -363,12 +363,13 @@ class Create
     {
         // if database connection opened
         if ($this->databaseConnection()) {
+        	$cleanq = strip_tags($searchq);
         	
         	// Find out how many items are in the table
 		    $sql = 'SELECT
 		        	COUNT(*)
 					FROM posts
-					WHERE post_title LIKE "%'. $searchq . '%" OR post_message LIKE "%' . $searchq . '%"';
+					WHERE post_title LIKE "%'. $cleanq . '%" OR post_message LIKE "%' . $cleanq . '%"';
 		    $query = $this->db_connection->prepare($sql);
 		    $query->execute();
 		    $this->total = $query->fetchColumn();
@@ -389,8 +390,6 @@ class Create
         
 			// Calculate the offset for the query
 		    $offset = ($this->page - 1)  * $this->limit;
-		    
-		    $cleanq = strip_tags($searchq);
 
             // database query, fetching all posts from the table that match the search query ($searchq)         
             $sql = 'SELECT * FROM posts 

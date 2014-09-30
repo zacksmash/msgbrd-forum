@@ -59,8 +59,10 @@
 			</form>
 		</div>
 		<div class="row radius panel collapse hide-for-small" style="margin-bottom: 15px;">
+			<div class="large-12 medium-12 small-12 columns text-center">
+				<h6>View Discussions By Category</h6><hr>
+			</div>
 			<div class="large-12 medium-12 small-12 columns">
-				<h6>View Posts By Category</h6><hr>
 				<a href="/discussions/bugs/" class="tiny radius expand button" style="margin-bottom: 15px;">View Bugs</a>
 				<a href="/discussions/features/" class="tiny radius expand button" style="margin-bottom: 15px;">View Features</a>
 				<a href="/discussions/questions/" class="tiny radius expand button" style="margin-bottom: 15px;">View Questions</a>
