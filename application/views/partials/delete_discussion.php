@@ -5,7 +5,7 @@
 	
 	<div class="large-6 small-6 columns">
 		<form action="/discussions/" method="post">
-			<input type="hidden" name="post_id" id="post_id" value="<?= $_GET['id']; ?>">
+			<input type="hidden" name="post_id" id="post_id" value="<?= $post['id']; ?>">
 			
 			<button type="submit" name="delete_post" class="tiny radius alert expand button">Yes</button>
 		</form>
