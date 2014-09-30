@@ -7,6 +7,8 @@
 		<link rel="stylesheet" href="<?= URL ?>public/css/normalize.css" />
 		<link rel="stylesheet" href="<?= URL ?>public/css/app.css" />
 		<link rel="stylesheet" href="<?= URL ?>public/css/fonts/social.css" />
+		<link href="<?= URL ?>public/img/apple-touch-icon.png" rel="apple-touch-icon" />
+		<link rel="icon" href="<?= URL ?>public/img/favicon.ico" type="image/x-icon" />
 		<script src="<?= URL ?>public/js/modernizr.js"></script>
 	</head>
 	<body>
