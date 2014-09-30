@@ -86,32 +86,32 @@ define("EMAIL_SMTP_ENCRYPTION", "ssl");
  * Configuration for: password reset email data
  * Set the absolute URL to password_reset.php, necessary for email password reset links
  */
-define("EMAIL_PASSWORDRESET_URL", "http://local.forum.com/password_reset/");
+define("EMAIL_PASSWORDRESET_URL", "http://local.forum/password_reset/");
 define("EMAIL_PASSWORDRESET_FROM", "no-reply@example.com");
 define("EMAIL_PASSWORDRESET_FROM_NAME", "MsgBrd Notification");
 define("EMAIL_PASSWORDRESET_SUBJECT", "MsgBrd Password Reset");
-define("EMAIL_PASSWORDRESET_CONTENT", "Hey, there! \n\n You recently requested a password reset link. Well, here you go! /n/n");
+define("EMAIL_PASSWORDRESET_CONTENT", "Hey, there!\n\n You recently requested a password reset link -- Here you go:\n\n");
 
 /**
  * Configuration for: verification email data
  * Set the absolute URL to register.php, necessary for email verification links
  */
-define("EMAIL_VERIFICATION_URL", "http://local.forum.com/");
+define("EMAIL_VERIFICATION_URL", "http://local.forum/");
 define("EMAIL_VERIFICATION_FROM", "no-reply@example.com");
 define("EMAIL_VERIFICATION_FROM_NAME", "MsgBrd Notification");
 define("EMAIL_VERIFICATION_SUBJECT", "MsgBrd Account Activation");
-define("EMAIL_VERIFICATION_CONTENT", "Hey, there! /n/n Thanks for signing up! Click this link to activate your account!/n/n");
+define("EMAIL_VERIFICATION_CONTENT", "Hey, there!\n\n Thanks for signing up -- Click this link to activate your account:\n\n");
 
 /**
  * Configuration for: post reply email data
  * Set the absolute URL to register.php, necessary for email verification links
  */
-define("EMAIL_POST_REPLY_URL", "http://local.forum.com/discussion/");
+define("EMAIL_POST_REPLY_URL", "http://local.forum/discussion/");
 define("EMAIL_POST_REPLY_FROM", "no-reply@example.com");
 define("EMAIL_POST_REPLY_FROM_NAME", "MsgBrd Notification");
-define("EMAIL_POST_REPLY_SUBJECT", "MsgBrd Post Reply");
-define("EMAIL_POST_REPLY_CONTENT_ONE", "Hey, there! \n\n A new reply has been added to your discussion.\n\n");
-define("EMAIL_POST_REPLY_CONTENT_TWO", "\n\nClick here to view it!/n/n");
+define("EMAIL_POST_REPLY_SUBJECT", "MsgBrd Discussion Reply");
+define("EMAIL_POST_REPLY_CONTENT_ONE", "Hey, there!\n\n A new reply has been added to your discussion.\n\n");
+define("EMAIL_POST_REPLY_CONTENT_TWO", "\n\nClick here to view it!\n\n");
 
 /**
  * Configuration for: Hashing strength
