@@ -2,7 +2,7 @@
 	<div class="large-7 medium-10 small-12 large-centered medium-centered columns">
 		<h4>Enter your username to reset your password.</h4>
 		<? if ($login->passwordResetLinkIsValid() == true) : ?>
-		<form method="post" action="/password_reset/" name="new_password_form" data-abide>
+		<form method="post" action="/" name="new_password_form" data-abide>
 		    <input type='hidden' name='user_name' value='<?= $_GET['user_name']; ?>' />
 		    <input type='hidden' name='user_password_reset_hash' value='<?= $_GET['verification_code']; ?>' />
 		    

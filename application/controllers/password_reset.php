@@ -11,15 +11,10 @@ class password_reset extends Controller
     {
 		$login = $this->loadModel('Login');
 		
-		if ($login->passwordResetWasSuccessful() == true && $login->passwordResetLinkIsValid() != true) {
-			header("Location: /");
-        	exit();
-        } else {
-        	$pagetitle = "Reset your password";
-        	
-        	require 'application/views/partials/header.php';
-			require 'application/views/password_reset.php';
-			require 'application/views/partials/footer.php';
-        }
+    	$pagetitle = "Reset your password";
+    	
+    	require 'application/views/partials/header.php';
+		require 'application/views/password_reset.php';
+		require 'application/views/partials/footer.php';
     }
 }
