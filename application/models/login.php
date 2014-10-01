@@ -625,10 +625,10 @@ class Login
 			    		SET user_bio = :bio, user_twitter = :twitter, user_facebook = :facebook, user_linkedin = :linkedin 
 			    		WHERE user_id = :user_id';
 			    $query = $this->db_connection->prepare($sql);
-			    $query->bindValue(':bio', strip_tags($bio), PDO::PARAM_STR);
-			    $query->bindValue(':twitter', strip_tags($twitter), PDO::PARAM_STR);
-			    $query->bindValue(':facebook', strip_tags($facebook), PDO::PARAM_STR);
-			    $query->bindValue(':linkedin', strip_tags($linkedin), PDO::PARAM_STR);
+			    $query->bindValue(':bio', htmlspecialchars($bio, ENT_QUOTES), PDO::PARAM_STR);
+			    $query->bindValue(':twitter', htmlspecialchars($twitter, ENT_QUOTES), PDO::PARAM_STR);
+			    $query->bindValue(':facebook', htmlspecialchars($facebook, ENT_QUOTES), PDO::PARAM_STR);
+			    $query->bindValue(':linkedin', htmlspecialchars($linkedin, ENT_QUOTES), PDO::PARAM_STR);
 			    $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
 			    $query->execute();
 			    
@@ -665,30 +665,37 @@ class Login
 	{
 		// if database connection opened
 	    if ($this->databaseConnection()) {
-			$allowedExts = array("gif", "jpeg", "jpg", "png");
+			$allowedExts = array("gif", "jpeg", "png");
 			$temp = explode(".", $_FILES["avatar_file"]["name"]);
 			$newfilename = "avatar-" . $user_id . '.' . "jpg";
 			$extension = end($temp);
 			
 			if ((($_FILES["avatar_file"]["type"] == "image/gif") 
 			|| ($_FILES["avatar_file"]["type"] == "image/jpeg") 
-			|| ($_FILES["avatar_file"]["type"] == "image/jpg") 
-			|| ($_FILES["avatar_file"]["type"] == "image/pjpeg") 
-			|| ($_FILES["avatar_file"]["type"] == "image/x-png") 
 			|| ($_FILES["avatar_file"]["type"] == "image/png")) 
 			&& ($_FILES["avatar_file"]["size"] < 20000000) 
 			&& in_array($extension, $allowedExts)) {
 			    if ($_FILES["avatar_file"]["error"] > 0) {
 			        $this->errors[] = "Return Code: ".$_FILES["avatar_file"]["error"];
 			    } else {
-			        if (file_exists("public/avatars/" . $_FILES["file"]["name"])) {
-			            move_uploaded_file($_FILES["avatar_file"]["tmp_name"],"public/avatars/" . $newfilename);
-			            $this->setUserAvatar($user_id);
-			            $this->messages[] = "Profile image updated successfully.";
+			        if (file_exists("public/avatars/" . $_FILES["avatar_file"]["name"])) {
+						$mimetype = mime_content_type($_FILES['avatar_file']['tmp_name']);
+						if(in_array($mimetype, array('image/jpeg', 'image/gif', 'image/png'))) {
+						   move_uploaded_file($_FILES["avatar_file"]["tmp_name"],"public/avatars/" . $newfilename);
+						   $this->setUserAvatar($user_id);
+						   $this->messages[] = "Profile image updated successfully.";
+						} else {
+						    $this->errors[] = 'Upload a real image, jerk!';
+						}
 			        } else {
-			            move_uploaded_file($_FILES["avatar_file"]["tmp_name"],"public/avatars/" . $newfilename);
-			            $this->setUserAvatar($user_id);
-			            $this->messages[] = "Profile image updated successfully.";
+			           	$mimetype = mime_content_type($_FILES['avatar_file']['tmp_name']);
+						if(in_array($mimetype, array('image/jpeg', 'image/gif', 'image/png'))) {
+						   move_uploaded_file($_FILES["avatar_file"]["tmp_name"],"public/avatars/" . $newfilename);
+						   $this->setUserAvatar($user_id);
+						   $this->messages[] = "Profile image updated successfully.";
+						} else {
+						    $this->errors[] = 'Upload a real image, jerk!';
+						}
 			        }
 			    }
 			} else {

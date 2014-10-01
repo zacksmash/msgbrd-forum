@@ -14,7 +14,7 @@
 			
 			<div class="row collapse panel radius post" style="margin-bottom: 15px;">
 				<div class="large-2 small-6 columns">
-					<div style="width:50px; height:50px; background: url('<? if ($avatar == 1) : ?>/public/avatars/avatar-<?= $post['author_id'] ?>.jpg<? else : ?>/public/avatars/default-avatar.png<? endif; ?>') no-repeat center; background-size: 50px; border-radius: 3px;"></div>
+					<div style="width:50px; height:50px; background: url('<? if ($avatar == 1) : ?>/public/avatars/avatar-<?= $post['author_id'] ?>.jpg<? else : ?>/public/avatars/default-avatar.png<? endif; ?>') no-repeat center; background-size: 50px;border: 2px solid #efefef; border-radius: 3px;"></div>
 				</div>
 				<div class="large-2 small-6 columns right">
 			    	<div style="width: 50px; height: 50px; background: #efefef; border-radius: 10px; text-align: center; float: right;">

@@ -77,7 +77,7 @@ class Create
         }
         
         if (isset($_POST['search_term'])) {
-			header("Location: /search_posts/?search=". strip_tags($_POST['search_term']));
+			header("Location: /search_posts/?search=". preg_replace('/[^A-Za-z0-9\(\) ]/', ' ', $_POST['search_term']));
 			exit();
 		}
     }
@@ -363,7 +363,7 @@ class Create
     {
         // if database connection opened
         if ($this->databaseConnection()) {
-        	$cleanq = strip_tags($searchq);
+        	$cleanq = preg_replace('/[^A-Za-z0-9\-\(\) ]/', '', $searchq);;
         	
         	// Find out how many items are in the table
 		    $sql = 'SELECT

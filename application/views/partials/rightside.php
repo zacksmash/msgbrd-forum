@@ -2,7 +2,7 @@
 <? if ($login->isUserLoggedIn() == true) : ?>
 		<div class="row radius panel collapse" style="margin-bottom: 15px;">
 			<div class="large-3 small-2 columns hide-for-small">
-				<div style="width:50px; height:50px; background: url('<? if ($avatar = $login->hasAvatar($_SESSION['user_id']) == 1) : ?>/public/avatars/avatar-<?= $_SESSION['user_id'] ?>.jpg<? else : ?>/public/avatars/default-avatar.png<? endif; ?>') no-repeat center; background-size: 50px; border-radius: 3px;"></div>
+				<div style="width:50px; height:50px; background: url('<? if ($avatar = $login->hasAvatar($_SESSION['user_id']) == 1) : ?>/public/avatars/avatar-<?= $_SESSION['user_id'] ?>.jpg<? else : ?>/public/avatars/default-avatar.png<? endif; ?>') no-repeat center; background-size: 50px;border: 2px solid #efefef; border-radius: 3px;"></div>
 			</div>
 			<div class="large-9 small-10 columns hide-for-small" style="margin-bottom: 20px;">
 				<span><?= $_SESSION['user_name'] ?></span><br>
