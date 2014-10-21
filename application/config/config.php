@@ -12,13 +12,13 @@
  * Useful to show every little problem during development, but only show hard errors in production
  */
 error_reporting(E_ALL);
-ini_set("display_errors", 1);
+ini_set("display_errors", 0);
 
 /**
  * Configuration for: Project URL
  * Put your URL here, for local development "127.0.0.1" or "localhost" (plus sub-folder) is fine
  */
-define('URL', 'http://local.forum/');
+define('URL', 'http://local.msgbrd/');
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 
 /**
@@ -27,7 +27,7 @@ define('ROOT', $_SERVER['DOCUMENT_ROOT']);
  */
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'forum');
+define('DB_NAME', 'local_msgbrd');
 define('DB_USER', 'root');
 define('DB_PASS', 'root');
 
@@ -47,7 +47,7 @@ define('DB_PASS', 'root');
  * COOKIE_SECRET_KEY: Put a random value here to make your app more secure. When changed, all cookies are reset.
  */
 define("COOKIE_RUNTIME", 1209600);
-define("COOKIE_DOMAIN", ".local.forum");
+define("COOKIE_DOMAIN", ".local.msgbrd");
 define("COOKIE_SECRET_KEY", "1gp@TMPS{+$78sfpMJFe-92s");
 
 /**
@@ -86,7 +86,7 @@ define("EMAIL_SMTP_ENCRYPTION", "ssl");
  * Configuration for: password reset email data
  * Set the absolute URL to password_reset.php, necessary for email password reset links
  */
-define("EMAIL_PASSWORDRESET_URL", "http://local.forum/password_reset/");
+define("EMAIL_PASSWORDRESET_URL", "http://local.msgbrd/password_reset/");
 define("EMAIL_PASSWORDRESET_FROM", "no-reply@example.com");
 define("EMAIL_PASSWORDRESET_FROM_NAME", "MsgBrd Notification");
 define("EMAIL_PASSWORDRESET_SUBJECT", "MsgBrd Password Reset");
@@ -96,7 +96,7 @@ define("EMAIL_PASSWORDRESET_CONTENT", "Hey, there!\n\n You recently requested a 
  * Configuration for: verification email data
  * Set the absolute URL to register.php, necessary for email verification links
  */
-define("EMAIL_VERIFICATION_URL", "http://local.forum/");
+define("EMAIL_VERIFICATION_URL", "http://local.msgbrd/");
 define("EMAIL_VERIFICATION_FROM", "no-reply@example.com");
 define("EMAIL_VERIFICATION_FROM_NAME", "MsgBrd Notification");
 define("EMAIL_VERIFICATION_SUBJECT", "MsgBrd Account Activation");
@@ -106,7 +106,7 @@ define("EMAIL_VERIFICATION_CONTENT", "Hey, there!\n\n Thanks for signing up -- C
  * Configuration for: post reply email data
  * Set the absolute URL to register.php, necessary for email verification links
  */
-define("EMAIL_POST_REPLY_URL", "http://local.forum/discussion/");
+define("EMAIL_POST_REPLY_URL", "http://local.msgbrd/discussion/");
 define("EMAIL_POST_REPLY_FROM", "no-reply@example.com");
 define("EMAIL_POST_REPLY_FROM_NAME", "MsgBrd Notification");
 define("EMAIL_POST_REPLY_SUBJECT", "MsgBrd Discussion Reply");
