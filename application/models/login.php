@@ -69,7 +69,7 @@ class Login
         if (isset($_POST["logout"])) {
             $this->doLogout();
 
-        // if user has an active session on the server
+            // if user has an active session on the server
         } elseif (!empty($_SESSION['user_name']) && ($_SESSION['user_logged_in'] == 1)) {
             $this->loginWithSessionData();
 
@@ -78,25 +78,25 @@ class Login
             if (isset($_POST["user_edit_submit_name"])) {
                 // function below uses use $_SESSION['user_id'] et $_SESSION['user_email']
                 $this->editUserName($_POST['user_name']);
-            // user try to change his email
+                // user try to change his email
             } elseif (isset($_POST["user_edit_submit_email"])) {
                 // function below uses use $_SESSION['user_id'] et $_SESSION['user_email']
                 $this->editUserEmail($_POST['user_email']);
-            // user try to change his password
+                // user try to change his password
             } elseif (isset($_POST["user_edit_submit_password"])) {
                 // function below uses $_SESSION['user_name'] and $_SESSION['user_id']
                 $this->editUserPassword($_POST['user_password_old'], $_POST['user_password_new'], $_POST['user_password_repeat']);
             } elseif (isset($_POST['user_edit_submit_social'])) {
-	            $this->editUserSocial($_POST['user_bio'], $_POST['user_twitter'], $_POST['user_facebook'], $_POST['user_linkedin'], $_SESSION['user_id']);
+                $this->editUserSocial($_POST['user_bio'], $_POST['user_twitter'], $_POST['user_facebook'], $_POST['user_linkedin'], $_SESSION['user_id']);
             } elseif (isset($_POST['user_edit_upload_avatar'])) {
-			    $this->uploadAvatar($_SESSION['user_id']);
-			}
+                $this->uploadAvatar($_SESSION['user_id']);
+            }
 
-        // login with cookie
+            // login with cookie
         } elseif (isset($_COOKIE['rememberme'])) {
             $this->loginWithCookieData();
 
-        // if user just submitted a login form
+            // if user just submitted a login form
         } elseif (isset($_POST["login"])) {
             if (!isset($_POST['user_rememberme'])) {
                 $_POST['user_rememberme'] = null;
@@ -112,13 +112,13 @@ class Login
         } elseif (isset($_POST["submit_new_password"])) {
             $this->editNewPassword($_POST['user_name'], $_POST['user_password_reset_hash'], $_POST['user_password_new'], $_POST['user_password_repeat']);
         }
-        
+
         // delete user account information if user is logged in
-		if ($this->isUserLoggedIn() == true) {        
-	        if (isset($_POST['delete_account'])) {
-		        $this->deleteAccount($_SESSION['user_id'],$_SESSION['user_name']);
-	        }
-	    }
+        if ($this->isUserLoggedIn() == true) {
+            if (isset($_POST['delete_account'])) {
+                $this->deleteAccount($_SESSION['user_id'], $_SESSION['user_name']);
+            }
+        }
     }
 
     /**
@@ -138,7 +138,7 @@ class Login
                 // @see http://wiki.hashphp.org/PDO_Tutorial_for_MySQL_Developers#Connecting_to_MySQL says:
                 // "Adding the charset to the DSN is very important for security reasons,
                 // most examples you'll see around leave it out. MAKE SURE TO INCLUDE THE CHARSET!"
-                $this->db_connection = new PDO('mysql:host='. DB_HOST .';dbname='. DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
+                $this->db_connection = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
                 return true;
             } catch (PDOException $e) {
                 $this->errors[] = MESSAGE_DATABASE_ERROR . $e->getMessage();
@@ -169,41 +169,41 @@ class Login
             return false;
         }
     }
-    
+
     public function getUserSocial($user_id)
     {
         // if database connection opened
         if ($this->databaseConnection()) {
-            // database query, fetching a single post from the table that matches the post ID         
-            $sql = 'SELECT * FROM users 
+            // database query, fetching a single post from the table that matches the post ID
+            $sql = 'SELECT * FROM users
             		WHERE user_id = :user_id';
             $query = $this->db_connection->prepare($sql);
             $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
             $query->execute();
             $user = $query->fetch();
-           	return $user;
+            return $user;
         } else {
             return false;
         }
     }
-    
+
     public function hasAvatar($user_id)
     {
         // if database connection opened
         if ($this->databaseConnection()) {
-            // database query, fetching a single post from the table that matches the post ID         
-            $sql = 'SELECT user_avatar FROM users 
+            // database query, fetching a single post from the table that matches the post ID
+            $sql = 'SELECT user_avatar FROM users
             		WHERE user_id = :user_id';
             $query = $this->db_connection->prepare($sql);
             $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
             $query->execute();
             $user = $query->fetchColumn();
-           	return $user;
+            return $user;
         } else {
             return false;
         }
     }
-    
+
     private function deleteAccount($user_id, $user_name)
     {
         // if database connection opened
@@ -213,14 +213,14 @@ class Login
             $query_delete_user->bindValue(':user_id', $user_id, PDO::PARAM_STR);
             $query_delete_user->bindValue(':user_name', $user_name, PDO::PARAM_STR);
             $query_delete_user->execute();
-			$this->deleteRememberMeCookie();
+            $this->deleteRememberMeCookie();
 
-			$_SESSION = array();
-			session_destroy();
+            $_SESSION = array();
+            session_destroy();
 
-			$this->user_is_logged_in = false;
-			
-			if ($query_delete_user->rowCount()) {
+            $this->user_is_logged_in = false;
+
+            if ($query_delete_user->rowCount()) {
                 $this->messages[] = MESSAGE_ACCOUNT_DELETED;
             } else {
                 $this->errors[] = MESSAGE_ACCOUNT_NOT_DELETED;
@@ -253,7 +253,7 @@ class Login
     {
         if (isset($_COOKIE['rememberme'])) {
             // extract data from the cookie
-            list ($user_id, $token, $hash) = explode(':', $_COOKIE['rememberme']);
+            list($user_id, $token, $hash) = explode(':', $_COOKIE['rememberme']);
             // check cookie hash validity
             if ($hash == hash('sha256', $user_id . ':' . $token . COOKIE_SECRET_KEY) && !empty($token)) {
                 // cookie looks good, try to select corresponding user
@@ -307,7 +307,7 @@ class Login
         } else if (empty($user_password)) {
             $this->errors[] = MESSAGE_PASSWORD_EMPTY;
 
-        // if POST data (from login form) contains non-empty user_name and non-empty user_password
+            // if POST data (from login form) contains non-empty user_name and non-empty user_password
         } else {
             // user can login with his username or his email address.
             // if user has not typed a valid email address, we try to identify him with his user_name
@@ -315,7 +315,7 @@ class Login
                 // database query, getting all the info of the selected user
                 $result_row = $this->getUserData(trim($user_name));
 
-            // if user has typed a valid email address, we try to identify him with his user_email
+                // if user has typed a valid email address, we try to identify him with his user_email
             } else if ($this->databaseConnection()) {
                 // database query, getting all the info of the selected user
                 $query_user = $this->db_connection->prepare('SELECT * FROM users WHERE user_email = :user_email');
@@ -326,22 +326,22 @@ class Login
             }
 
             // if this user not exists
-            if (! isset($result_row->user_id)) {
+            if (!isset($result_row->user_id)) {
                 // was MESSAGE_USER_DOES_NOT_EXIST before, but has changed to MESSAGE_LOGIN_FAILED
                 // to prevent potential attackers showing if the user exists
                 $this->errors[] = MESSAGE_LOGIN_FAILED;
             } else if (($result_row->user_failed_logins >= 3) && ($result_row->user_last_failed_login > (time() - 30))) {
                 $this->errors[] = MESSAGE_PASSWORD_WRONG_3_TIMES;
-            // using PHP 5.5's password_verify() function to check if the provided passwords fits to the hash of that user's password
-            } else if (! password_verify($user_password, $result_row->user_password_hash)) {
+                // using PHP 5.5's password_verify() function to check if the provided passwords fits to the hash of that user's password
+            } else if (!password_verify($user_password, $result_row->user_password_hash)) {
                 // increment the failed login counter for that user
                 $sth = $this->db_connection->prepare('UPDATE users '
-                        . 'SET user_failed_logins = user_failed_logins+1, user_last_failed_login = :user_last_failed_login '
-                        . 'WHERE user_name = :user_name OR user_email = :user_name');
+                    . 'SET user_failed_logins = user_failed_logins+1, user_last_failed_login = :user_last_failed_login '
+                    . 'WHERE user_name = :user_name OR user_email = :user_name');
                 $sth->execute(array(':user_name' => $user_name, ':user_last_failed_login' => time()));
 
                 $this->errors[] = MESSAGE_PASSWORD_WRONG;
-            // has the user activated their account with the verification email
+                // has the user activated their account with the verification email
             } else if ($result_row->user_active != 1) {
                 $this->errors[] = MESSAGE_ACCOUNT_NOT_ACTIVATED;
             } else {
@@ -360,8 +360,8 @@ class Login
 
                 // reset the failed login counter for that user
                 $sth = $this->db_connection->prepare('UPDATE users '
-                        . 'SET user_failed_logins = 0, user_last_failed_login = NULL '
-                        . 'WHERE user_id = :user_id AND user_failed_logins != 0');
+                    . 'SET user_failed_logins = 0, user_last_failed_login = NULL '
+                    . 'WHERE user_id = :user_id AND user_failed_logins != 0');
                 $sth->execute(array(':user_id' => $result_row->user_id));
 
                 // if user has check the "remember me" checkbox, then generate token and write cookie
@@ -474,11 +474,10 @@ class Login
         if (!empty($user_name) && $user_name == $_SESSION['user_name']) {
             $this->errors[] = MESSAGE_USERNAME_SAME_LIKE_OLD_ONE;
 
-        // username cannot be empty and must be azAZ09 and 2-64 characters
-        // TODO: maybe this pattern should also be implemented in Registration.php (or other way round)
+            // username cannot be empty and must be azAZ09 and 2-64 characters
+            // TODO: maybe this pattern should also be implemented in Registration.php (or other way round)
         } elseif (empty($user_name) || !preg_match("/^(?=.{2,64}$)[a-zA-Z][a-zA-Z0-9]*(?: [a-zA-Z0-9]+)*$/", $user_name)) {
             $this->errors[] = MESSAGE_USERNAME_INVALID;
-
         } else {
             // check if new username already exists
             $result_row = $this->getUserData($user_name);
@@ -512,10 +511,9 @@ class Login
 
         if (!empty($user_email) && $user_email == $_SESSION["user_email"]) {
             $this->errors[] = MESSAGE_EMAIL_SAME_LIKE_OLD_ONE;
-        // user mail cannot be empty and must be in email format
+            // user mail cannot be empty and must be in email format
         } elseif (empty($user_email) || !filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
             $this->errors[] = MESSAGE_EMAIL_INVALID;
-
         } else if ($this->databaseConnection()) {
             // check if new email already exists
             $query_user = $this->db_connection->prepare('SELECT * FROM users WHERE user_email = :user_email');
@@ -551,14 +549,14 @@ class Login
     {
         if (empty($user_password_new) || empty($user_password_repeat) || empty($user_password_old)) {
             $this->errors[] = MESSAGE_PASSWORD_EMPTY;
-        // is the repeat password identical to password
+            // is the repeat password identical to password
         } elseif ($user_password_new !== $user_password_repeat) {
             $this->errors[] = MESSAGE_PASSWORD_BAD_CONFIRM;
-        // password need to have a minimum length of 6 characters
+            // password need to have a minimum length of 6 characters
         } elseif (strlen($user_password_new) < 6) {
             $this->errors[] = MESSAGE_PASSWORD_TOO_SHORT;
 
-        // all the above tests are ok
+            // all the above tests are ok
         } else {
             // database query, getting hash of currently logged in user (to check with just provided password)
             $result_row = $this->getUserData($_SESSION['user_name']);
@@ -599,110 +597,112 @@ class Login
             }
         }
     }
-    
-    public function editUserSocial($bio,  
-    						       $twitter,
-    						       $facebook,
-    						       $linkedin,
-    						       $user_id)
-    {
-	    // if database connection opened
-	    if ($this->databaseConnection()) {
-	    	
-	    	// validate twitter URL
-	    	if (!empty($twitter) && !filter_var($twitter, FILTER_VALIDATE_URL)) {
-	    		$this->errors[] = "The Twitter URL you entered was not in a valid format.";
-	    	// validate facebook URL
-	    	} elseif (!empty($facebook) && !filter_var($facebook, FILTER_VALIDATE_URL)) {
-	    		$this->errors[] = "The Facebook URL you entered was not in a valid format.";
-	    	// validate linked in URL
-	    	} elseif (!empty($linkedin) && !filter_var($linkedin, FILTER_VALIDATE_URL)) {
-	    		$this->errors[] = "The Linked In URL you entered was not in a valid format.";
-	    	// if all URLs pass, procede with db query
-	    	} else {
-		    	// database query, update the social information for the selected user ($user_id)
-			    $sql = 'UPDATE users 
-			    		SET user_bio = :bio, user_twitter = :twitter, user_facebook = :facebook, user_linkedin = :linkedin 
+
+    public function editUserSocial(
+        $bio,
+        $twitter,
+        $facebook,
+        $linkedin,
+        $user_id
+    ) {
+        // if database connection opened
+        if ($this->databaseConnection()) {
+
+            // validate twitter URL
+            if (!empty($twitter) && !filter_var($twitter, FILTER_VALIDATE_URL)) {
+                $this->errors[] = "The Twitter URL you entered was not in a valid format.";
+                // validate facebook URL
+            } elseif (!empty($facebook) && !filter_var($facebook, FILTER_VALIDATE_URL)) {
+                $this->errors[] = "The Facebook URL you entered was not in a valid format.";
+                // validate linked in URL
+            } elseif (!empty($linkedin) && !filter_var($linkedin, FILTER_VALIDATE_URL)) {
+                $this->errors[] = "The Linked In URL you entered was not in a valid format.";
+                // if all URLs pass, procede with db query
+            } else {
+                // database query, update the social information for the selected user ($user_id)
+                $sql = 'UPDATE users
+			    		SET user_bio = :bio, user_twitter = :twitter, user_facebook = :facebook, user_linkedin = :linkedin
 			    		WHERE user_id = :user_id';
-			    $query = $this->db_connection->prepare($sql);
-			    $query->bindValue(':bio', htmlspecialchars($bio, ENT_QUOTES), PDO::PARAM_STR);
-			    $query->bindValue(':twitter', htmlspecialchars($twitter, ENT_QUOTES), PDO::PARAM_STR);
-			    $query->bindValue(':facebook', htmlspecialchars($facebook, ENT_QUOTES), PDO::PARAM_STR);
-			    $query->bindValue(':linkedin', htmlspecialchars($linkedin, ENT_QUOTES), PDO::PARAM_STR);
-			    $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-			    $query->execute();
-			    
-			    if ($query->rowCount()) {
-	                $this->messages[] = "Profile updated successfully";
-	            } elseif ($query) {
-	            	$this->messages[] = "Profile updated successfully";
-	            } else {
-	                $this->errors[] = "Profile could not be updated. Try again.";
-	            }
+                $query = $this->db_connection->prepare($sql);
+                $query->bindValue(':bio', htmlspecialchars($bio, ENT_QUOTES), PDO::PARAM_STR);
+                $query->bindValue(':twitter', htmlspecialchars($twitter, ENT_QUOTES), PDO::PARAM_STR);
+                $query->bindValue(':facebook', htmlspecialchars($facebook, ENT_QUOTES), PDO::PARAM_STR);
+                $query->bindValue(':linkedin', htmlspecialchars($linkedin, ENT_QUOTES), PDO::PARAM_STR);
+                $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+                $query->execute();
+
+                if ($query->rowCount()) {
+                    $this->messages[] = "Profile updated successfully";
+                } elseif ($query) {
+                    $this->messages[] = "Profile updated successfully";
+                } else {
+                    $this->errors[] = "Profile could not be updated. Try again.";
+                }
             }
-	    } else {
-		    return false;
-	    }
+        } else {
+            return false;
+        }
     }
- 
+
     public function setUserAvatar($user_id)
     {
-	    // if database connection opened
-	    if ($this->databaseConnection()) {
-	    	// database query, update the selected post
-		    $sql = 'UPDATE users 
+        // if database connection opened
+        if ($this->databaseConnection()) {
+            // database query, update the selected post
+            $sql = 'UPDATE users
 		    		SET user_avatar = 1
 		    		WHERE user_id = :user_id';
-		    $query = $this->db_connection->prepare($sql);
-		    $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-		    $query->execute();
-	    } else {
-		    return false;
-	    }
+            $query = $this->db_connection->prepare($sql);
+            $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+            $query->execute();
+        } else {
+            return false;
+        }
     }
-    
-	public function uploadAvatar($user_id) 
-	{
-		// if database connection opened
-	    if ($this->databaseConnection()) {
-			$allowedExts = array("gif", "jpeg", "png");
-			$temp = explode(".", $_FILES["avatar_file"]["name"]);
-			$newfilename = "avatar-" . $user_id . '.' . "jpg";
-			$extension = end($temp);
-			
-			if ((($_FILES["avatar_file"]["type"] == "image/gif") 
-			|| ($_FILES["avatar_file"]["type"] == "image/jpeg") 
-			|| ($_FILES["avatar_file"]["type"] == "image/png")) 
-			&& ($_FILES["avatar_file"]["size"] < 20000000) 
-			&& in_array($extension, $allowedExts)) {
-			    if ($_FILES["avatar_file"]["error"] > 0) {
-			        $this->errors[] = "Return Code: ".$_FILES["avatar_file"]["error"];
-			    } else {
-			        if (file_exists("public/avatars/" . $_FILES["avatar_file"]["name"])) {
-						$mimetype = mime_content_type($_FILES['avatar_file']['tmp_name']);
-						if(in_array($mimetype, array('image/jpeg', 'image/gif', 'image/png'))) {
-						   move_uploaded_file($_FILES["avatar_file"]["tmp_name"],"public/avatars/" . $newfilename);
-						   $this->setUserAvatar($user_id);
-						   $this->messages[] = "Profile image updated successfully.";
-						} else {
-						    $this->errors[] = 'Upload a real image, jerk!';
-						}
-			        } else {
-			           	$mimetype = mime_content_type($_FILES['avatar_file']['tmp_name']);
-						if(in_array($mimetype, array('image/jpeg', 'image/gif', 'image/png'))) {
-						   move_uploaded_file($_FILES["avatar_file"]["tmp_name"],"public/avatars/" . $newfilename);
-						   $this->setUserAvatar($user_id);
-						   $this->messages[] = "Profile image updated successfully.";
-						} else {
-						    $this->errors[] = 'Upload a real image, jerk!';
-						}
-			        }
-			    }
-			} else {
-			    $this->errors[] = "Invalid file - Profile image could not be updated.";
-			}
-		}
-	}
+
+    public function uploadAvatar($user_id)
+    {
+        // if database connection opened
+        if ($this->databaseConnection()) {
+            $allowedExts = array("gif", "jpeg", "png");
+            $temp = explode(".", $_FILES["avatar_file"]["name"]);
+            $newfilename = "avatar-" . $user_id . '.' . "jpg";
+            $extension = end($temp);
+
+            if ((($_FILES["avatar_file"]["type"] == "image/gif")
+                    || ($_FILES["avatar_file"]["type"] == "image/jpeg")
+                    || ($_FILES["avatar_file"]["type"] == "image/png"))
+                && ($_FILES["avatar_file"]["size"] < 20000000)
+                && in_array($extension, $allowedExts)
+            ) {
+                if ($_FILES["avatar_file"]["error"] > 0) {
+                    $this->errors[] = "Return Code: " . $_FILES["avatar_file"]["error"];
+                } else {
+                    if (file_exists("public/avatars/" . $_FILES["avatar_file"]["name"])) {
+                        $mimetype = mime_content_type($_FILES['avatar_file']['tmp_name']);
+                        if (in_array($mimetype, array('image/jpeg', 'image/gif', 'image/png'))) {
+                            move_uploaded_file($_FILES["avatar_file"]["tmp_name"], "public/avatars/" . $newfilename);
+                            $this->setUserAvatar($user_id);
+                            $this->messages[] = "Profile image updated successfully.";
+                        } else {
+                            $this->errors[] = 'Upload a real image, jerk!';
+                        }
+                    } else {
+                        $mimetype = mime_content_type($_FILES['avatar_file']['tmp_name']);
+                        if (in_array($mimetype, array('image/jpeg', 'image/gif', 'image/png'))) {
+                            move_uploaded_file($_FILES["avatar_file"]["tmp_name"], "public/avatars/" . $newfilename);
+                            $this->setUserAvatar($user_id);
+                            $this->messages[] = "Profile image updated successfully.";
+                        } else {
+                            $this->errors[] = 'Upload a real image, jerk!';
+                        }
+                    }
+                }
+            } else {
+                $this->errors[] = "Invalid file - Profile image could not be updated.";
+            }
+        }
+    }
 
     /**
      * Sets a random token into the database (that will verify the user when he/she comes back via the link
@@ -714,7 +714,6 @@ class Login
 
         if (empty($user_name)) {
             $this->errors[] = MESSAGE_USERNAME_EMPTY;
-
         } else {
             // generate timestamp (to see when exactly the user (or an attacker) requested the password reset mail)
             // btw this is an integer ;)
@@ -786,10 +785,10 @@ class Login
         $mail->AddAddress($user_email);
         $mail->Subject = EMAIL_PASSWORDRESET_SUBJECT;
 
-        $link    = EMAIL_PASSWORDRESET_URL.'?user_name='.urlencode($user_name).'&verification_code='.urlencode($user_password_reset_hash);
+        $link    = EMAIL_PASSWORDRESET_URL . '?user_name=' . urlencode($user_name) . '&verification_code=' . urlencode($user_password_reset_hash);
         $mail->Body = EMAIL_PASSWORDRESET_CONTENT . ' ' . $link;
 
-        if(!$mail->Send()) {
+        if (!$mail->Send()) {
             $this->errors[] = MESSAGE_PASSWORD_RESET_MAIL_FAILED . $mail->ErrorInfo;
             return false;
         } else {
@@ -838,13 +837,13 @@ class Login
 
         if (empty($user_name) || empty($user_password_reset_hash) || empty($user_password_new) || empty($user_password_repeat)) {
             $this->errors[] = MESSAGE_PASSWORD_EMPTY;
-        // is the repeat password identical to password
+            // is the repeat password identical to password
         } else if ($user_password_new !== $user_password_repeat) {
             $this->errors[] = MESSAGE_PASSWORD_BAD_CONFIRM;
-        // password need to have a minimum length of 6 characters
+            // password need to have a minimum length of 6 characters
         } else if (strlen($user_password_new) < 6) {
             $this->errors[] = MESSAGE_PASSWORD_TOO_SHORT;
-        // if database connection opened
+            // if database connection opened
         } else if ($this->databaseConnection()) {
             // now it gets a little bit crazy: check if we have a constant HASH_COST_FACTOR defined (in config/hashing.php),
             // if so: put the value into $hash_cost_factor, if not, make $hash_cost_factor = null

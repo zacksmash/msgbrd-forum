@@ -1,5 +1,5 @@
 <div id="new_discussion" class="reveal-modal small" data-reveal>
-	<form action="" method="post" accept-charset="utf-8" data-abide>
+	<form action="/" method="post" accept-charset="utf-8" data-abide>
 		<div class="row collapse">
 			<div class="small-4 large-4 columns">
 				<span class="prefix">Post Title:</span>
@@ -9,7 +9,7 @@
 				<small class="error">Add a name for this discussion.</small>
 			</div>
 		</div>
-		
+
 		<div class="row collapse">
 			<div class="small-4 large-4 columns">
 				<span class="prefix">Category</span>
@@ -25,10 +25,10 @@
 				</select>
 			</div>
 		</div>
-		
-		<textarea name="post_message" rows="4"  placeholder="Add a message for this discussion..." required></textarea>
+
+		<textarea name="post_message" rows="4" placeholder="Add a message for this discussion..." required></textarea>
 		<small class="error">Add a message to your discussion.</small>
-		
+
 		<input type="submit" name="submit_post" value="Submit Discussion" class="tiny radius button">
 		<div class="tiny radius secondary button" onclick="$('#new_discussion').foundation('reveal', 'close');">Cancel</div>
 	</form>

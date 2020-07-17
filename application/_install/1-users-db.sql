@@ -11,9 +11,9 @@ CREATE TABLE `users` (
   `user_rememberme_token` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'user''s remember-me cookie token',
   `user_failed_logins` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'user''s failed login attemps',
   `user_last_failed_login` int(10) DEFAULT NULL COMMENT 'unix timestamp of last failed login attempt',
-  `user_registration_datetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `user_registration_datetime` datetime NOT NULL,
   `user_registration_ip` varchar(39) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0.0.0.0',
-  `user_bio` varchar(350) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'user''s bio',
+  `user_bio` longtext COLLATE utf8_unicode_ci COMMENT 'user''s bio',
   `user_twitter` varchar(140) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'user''s twitter profile',
   `user_facebook` varchar(140) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'user''s facebook profile',
   `user_linkedin` varchar(140) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'user''s linked in profile',
@@ -21,4 +21,4 @@ CREATE TABLE `users` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_name` (`user_name`),
   UNIQUE KEY `user_email` (`user_email`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='user data';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='user data';

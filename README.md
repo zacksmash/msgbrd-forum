@@ -10,6 +10,12 @@ MsgBrd is an easy to use forum/message board for small projects.
 
 Version
 ----
+  -- PHP 5.6
+  -- Short Open Tags enabled
+  -- Apache
+
+Version
+----
 
 1.0
 

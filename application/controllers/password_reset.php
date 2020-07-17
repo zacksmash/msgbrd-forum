@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * Please note:
@@ -7,14 +8,14 @@
  */
 class password_reset extends Controller
 {
-    public function index()
-    {
+	public function index()
+	{
 		$login = $this->loadModel('Login');
-		
-    	$pagetitle = "Reset your password";
-    	
-    	require 'application/views/partials/header.php';
+
+		$pagetitle = "Reset your password";
+
+		require 'application/views/partials/header.php';
 		require 'application/views/password_reset.php';
 		require 'application/views/partials/footer.php';
-    }
+	}
 }

@@ -40,7 +40,7 @@ class Registration
         // if we have such a POST request, call the registerNewUser() method
         if (isset($_POST["register"])) {
             $this->registerNewUser($_POST['user_name'], $_POST['user_email'], $_POST['user_password_new'], $_POST['user_password_repeat']);
-        // if we have such a GET request, call the verifyNewUser() method
+            // if we have such a GET request, call the verifyNewUser() method
         } else if (isset($_GET["id"]) && isset($_GET["verification_code"])) {
             $this->verifyNewUser($_GET["id"], $_GET["verification_code"]);
         }
@@ -63,9 +63,9 @@ class Registration
                 // @see http://wiki.hashphp.org/PDO_Tutorial_for_MySQL_Developers#Connecting_to_MySQL says:
                 // "Adding the charset to the DSN is very important for security reasons,
                 // most examples you'll see around leave it out. MAKE SURE TO INCLUDE THE CHARSET!"
-                $this->db_connection = new PDO('mysql:host='. DB_HOST .';dbname='. DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
+                $this->db_connection = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
                 return true;
-            // If an error is catched, database connection failed
+                // If an error is catched, database connection failed
             } catch (PDOException $e) {
                 $this->errors[] = MESSAGE_DATABASE_ERROR;
                 return false;
@@ -104,7 +104,7 @@ class Registration
         } elseif (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
             $this->errors[] = MESSAGE_EMAIL_INVALID;
 
-        // finally if all the above checks are ok
+            // finally if all the above checks are ok
         } else if ($this->databaseConnection()) {
             // check if username or email already exists
             $query_check_user_name = $this->db_connection->prepare('SELECT user_name, user_email FROM users WHERE user_name=:user_name OR user_email=:user_email');
@@ -200,12 +200,12 @@ class Registration
         $mail->AddAddress($user_email);
         $mail->Subject = EMAIL_VERIFICATION_SUBJECT;
 
-        $link = EMAIL_VERIFICATION_URL.'?id='.urlencode($user_id).'&verification_code='.urlencode($user_activation_hash);
+        $link = EMAIL_VERIFICATION_URL . '?id=' . urlencode($user_id) . '&verification_code=' . urlencode($user_activation_hash);
 
         // the link to your register.php, please set this value in config/email_verification.php
-        $mail->Body = EMAIL_VERIFICATION_CONTENT.' '.$link;
+        $mail->Body = EMAIL_VERIFICATION_CONTENT . ' ' . $link;
 
-        if(!$mail->Send()) {
+        if (!$mail->Send()) {
             $this->errors[] = MESSAGE_VERIFICATION_MAIL_NOT_SENT . $mail->ErrorInfo;
             return false;
         } else {

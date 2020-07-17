@@ -8,7 +8,7 @@
 				<input type="text" name="post_name" value="<?= $post['post_title']; ?>" disabled>
 			</div>
 		</div>
-		
+
 		<div class="row collapse">
 			<div class="small-4 large-4 columns">
 				<span class="prefix">Category</span>
@@ -25,10 +25,10 @@
 				<small class="error">Select a category.</small>
 			</div>
 		</div>
-		
-		<textarea name="post_message" rows="4"  placeholder="Add a message for this discussion..." required><?= $post['post_message']; ?></textarea>
+
+		<textarea name="post_message" rows="4" placeholder="Add a message for this discussion..." required><?= $post['post_message']; ?></textarea>
 		<small class="error">Add a message for this discussion.</small>
-		
+
 		<input type="hidden" name="post_id" value="<?= $post['id']; ?>">
 		<input type="submit" name="update_post" value="Update Discussion" class="tiny radius button">
 		<div class="tiny radius secondary button" onclick="$('#edit_discussion').foundation('reveal', 'close');">Cancel</div>
