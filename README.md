@@ -8,11 +8,11 @@ MsgBrd is an easy to use forum/message board for small projects.
   - Notifications when another user replies to your post
   - Lots more!
 
-Version
+Requirements
 ----
-  -- PHP 5.6
-  -- Short Open Tags enabled
-  -- Apache
+  - PHP 5.6
+  - Short Open Tags enabled
+  - Apache
 
 Version
 ----
