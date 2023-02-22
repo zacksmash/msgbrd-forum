@@ -1,3 +1,5 @@
+> :warning: This projects was, like, the first thing I've ever built. It should not be used for ANYTHING.
+
 MsgBrd
 =========
 
