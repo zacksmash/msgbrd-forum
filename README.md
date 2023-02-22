@@ -1,4 +1,4 @@
-| > :warning: This projects was, like, the first thing I've ever built. It should not be used for ANYTHING. |
+| > :warning: This project was, like, the first thing I ever built with PHP. It should not be used for ANYTHING other than a milestone to look back on. |
 | --- |
 
 
